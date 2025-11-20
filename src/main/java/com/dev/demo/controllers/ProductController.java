@@ -1,4 +1,4 @@
-package com.dev.demo.Controller;
+package com.dev.demo.controllers;
 
 import org.springframework.web.bind.annotation.*;
 
