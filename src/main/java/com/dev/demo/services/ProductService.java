@@ -1,4 +1,11 @@
 package com.dev.demo.services;
 
-public class ProductService {
+import com.dev.demo.models.Product;
+
+import java.util.*;
+
+public interface ProductService {
+    Product getProductById(Long id);
+    List<Product> getAllProducts();
+
 }
