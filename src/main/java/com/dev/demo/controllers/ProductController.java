@@ -15,6 +15,11 @@ public class ProductController {
         this.productService = productService;
     }
 
+    @PostMapping()
+    public GenericProductDto createProduct(@RequestBody GenericProductDto productDto) {
+        return productService.createProduct(productDto);
+    }
+
     @GetMapping()
     public String getAllProducts( ) {
         return null;
@@ -28,10 +33,6 @@ public class ProductController {
 
     }
 
-    @PostMapping()
-    public void createProduct() {
-
-    }
     @PutMapping("/{id}")
     public void updateProductById() {
 

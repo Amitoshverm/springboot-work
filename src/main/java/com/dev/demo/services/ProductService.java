@@ -8,5 +8,5 @@ import java.util.*;
 public interface ProductService {
     GenericProductDto getProductById(Long id);
     List<Product> getAllProducts();
-
+    GenericProductDto createProduct(GenericProductDto productDto);
 }
