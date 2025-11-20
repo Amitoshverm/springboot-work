@@ -5,9 +5,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service("fakeProductService")
-public class FakeStoreProductService implements ProductService{
 
+@Service("selfProductService")
+public class SelfProductService implements ProductService{
     @Override
     public Product getProductById(Long id) {
         return null;
