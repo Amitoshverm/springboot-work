@@ -1,10 +1,17 @@
 package com.dev.demo.controllers;
 
+import com.dev.demo.services.ProductService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/product")
 public class ProductController {
+
+    private ProductService productService;
+
+    public ProductController(ProductService productService) {
+        this.productService = productService;
+    }
 
     @GetMapping()
     public String getAllProducts( ) {
