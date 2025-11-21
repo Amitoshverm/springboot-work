@@ -15,12 +15,22 @@ public class SelfProductService implements ProductService{
     }
 
     @Override
-    public List<Product> getAllProducts() {
+    public List<GenericProductDto> getAllProducts() {
         return List.of();
     }
 
     @Override
+    public GenericProductDto updateProductById(Long id, GenericProductDto productDto) {
+        return null;
+    }
+
+    @Override
     public GenericProductDto createProduct(GenericProductDto productDto) {
+        return null;
+    }
+
+    @Override
+    public String deleteProductById(Long id) {
         return null;
     }
 }
