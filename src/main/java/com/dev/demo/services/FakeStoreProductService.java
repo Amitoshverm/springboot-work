@@ -7,7 +7,6 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
@@ -18,7 +17,7 @@ public class FakeStoreProductService implements ProductService{
 
     private RestTemplateBuilder restTemplateBuilder;
     private String getRequestUrl = "https://fakestoreapi.com/products/{id}";
-    private String postRquestUrl = "https://fakestoreapi.com/products";
+    private String productBaseUrl = "https://fakestoreapi.com/products";
 
     public FakeStoreProductService(RestTemplateBuilder restTemplateBuilder) {
         this.restTemplateBuilder = restTemplateBuilder;
@@ -43,7 +42,7 @@ public class FakeStoreProductService implements ProductService{
     @Override
     public GenericProductDto createProduct(GenericProductDto productDto) {
         RestTemplate restTemplate = restTemplateBuilder.build();
-        ResponseEntity<GenericProductDto> response= restTemplate.postForEntity(postRquestUrl, productDto, GenericProductDto.class);
+        ResponseEntity<GenericProductDto> response= restTemplate.postForEntity(productBaseUrl, productDto, GenericProductDto.class);
         return response.getBody();
     }
 
@@ -63,7 +62,7 @@ public class FakeStoreProductService implements ProductService{
     @Override
     public List<GenericProductDto> getAllProducts() {
         RestTemplate restTemplate = restTemplateBuilder.build();
-        ResponseEntity<List<GenericProductDto>> response = restTemplate.exchange(postRquestUrl, HttpMethod.GET, null,
+        ResponseEntity<List<GenericProductDto>> response = restTemplate.exchange(productBaseUrl, HttpMethod.GET, null,
                 new ParameterizedTypeReference<List<GenericProductDto>>() {
         });
         List<GenericProductDto> fakeProducts = response.getBody();
