@@ -3,21 +3,18 @@ package com.dev.demo.services;
 import com.dev.demo.dtos.FakeStoreProductDto;
 import com.dev.demo.dtos.GenericProductDto;
 import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service("fakeStoreProductService")
 public class FakeStoreProductService implements ProductService{
 
     private RestTemplateBuilder restTemplateBuilder;
-    private String getRequestUrl = "https://fakestoreapi.com/products/{id}";
+    private String specificProductUrl = "https://fakestoreapi.com/products/{id}";
     private String productBaseUrl = "https://fakestoreapi.com/products";
 
     public FakeStoreProductService(RestTemplateBuilder restTemplateBuilder) {
@@ -27,7 +24,7 @@ public class FakeStoreProductService implements ProductService{
     @Override
     public GenericProductDto getProductById(Long id) {
         RestTemplate restTemplate = restTemplateBuilder.build();
-        ResponseEntity<FakeStoreProductDto> response= restTemplate.getForEntity(getRequestUrl, FakeStoreProductDto.class, id);
+        ResponseEntity<FakeStoreProductDto> response= restTemplate.getForEntity(specificProductUrl, FakeStoreProductDto.class, id);
 //        response.getStatusCode();
         FakeStoreProductDto fakeStoreProductDto = response.getBody();
 
@@ -50,12 +47,12 @@ public class FakeStoreProductService implements ProductService{
     @Override
     public String deleteProductById(Long id) {
         RestTemplate restTemplate = restTemplateBuilder.build();
-        ResponseEntity<FakeStoreProductDto> response = restTemplate.getForEntity(getRequestUrl, FakeStoreProductDto.class, id);
+        ResponseEntity<FakeStoreProductDto> response = restTemplate.getForEntity(specificProductUrl, FakeStoreProductDto.class, id);
         FakeStoreProductDto data = response.getBody();
         if(data == null){
             return "data with id: "+id+" not found";
         }
-        restTemplate.delete(getRequestUrl,id);
+        restTemplate.delete(specificProductUrl,id);
 //        response.getStatusCode();
         return "data with id: "+id+" has been deleted";
     }
@@ -99,7 +96,7 @@ public class FakeStoreProductService implements ProductService{
     @Override
     public GenericProductDto updateProductById(Long id, GenericProductDto productDto) {
         RestTemplate restTemplate = restTemplateBuilder.build();
-        ResponseEntity<GenericProductDto> response = restTemplate.getForEntity(getRequestUrl, GenericProductDto.class, id);
+        ResponseEntity<GenericProductDto> response = restTemplate.getForEntity(specificProductUrl, GenericProductDto.class, id);
         GenericProductDto data = response.getBody();
 
 
