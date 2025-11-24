@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -49,8 +50,8 @@ public class FakeStoreProductService implements ProductService{
     @Override
     public String deleteProductById(Long id) {
         RestTemplate restTemplate = restTemplateBuilder.build();
-        ResponseEntity<GenericProductDto> response = restTemplate.getForEntity(getRequestUrl, GenericProductDto.class, id);
-        GenericProductDto data = response.getBody();
+        ResponseEntity<FakeStoreProductDto> response = restTemplate.getForEntity(getRequestUrl, FakeStoreProductDto.class, id);
+        FakeStoreProductDto data = response.getBody();
         if(data == null){
             return "data with id: "+id+" not found";
         }
@@ -62,22 +63,37 @@ public class FakeStoreProductService implements ProductService{
     @Override
     public List<GenericProductDto> getAllProducts() {
         RestTemplate restTemplate = restTemplateBuilder.build();
-        ResponseEntity<List<GenericProductDto>> response = restTemplate.exchange(productBaseUrl, HttpMethod.GET, null,
-                new ParameterizedTypeReference<List<GenericProductDto>>() {
-        });
-        List<GenericProductDto> fakeProducts = response.getBody();
-        if (fakeProducts == null) {
-            return List.of();
-        }
-        return fakeProducts.stream().map(f -> {
+        ResponseEntity<FakeStoreProductDto[]> response = restTemplate.getForEntity(productBaseUrl, FakeStoreProductDto[].class);
+
+        List<GenericProductDto> products = new ArrayList<>();
+
+        for (FakeStoreProductDto dto : response.getBody()) {
             GenericProductDto product = new GenericProductDto();
-            product.setTitle(f.getTitle());
-            product.setPrice(f.getPrice());
-            product.setDescription(f.getDescription());
-            product.setCategory(f.getCategory());
-            product.setImage(f.getImage());
-            return product;
-        }).collect(Collectors.toList());
+            product.setTitle(dto.getTitle());
+            product.setPrice(dto.getPrice());
+            product.setDescription(dto.getDescription());
+            product.setCategory(dto.getCategory());
+            product.setImage(dto.getImage());
+            products.add(product);
+        }
+        return products;
+
+//        ResponseEntity<List<GenericProductDto>> response = restTemplate.exchange(productBaseUrl, HttpMethod.GET, null,
+//                new ParameterizedTypeReference<List<GenericProductDto>>() {
+//        });
+//        List<GenericProductDto> fakeProducts = response.getBody();
+//        if (fakeProducts == null) {
+//            return List.of();
+//        }
+//        return fakeProducts.stream().map(f -> {
+//            GenericProductDto product = new GenericProductDto();
+//            product.setTitle(f.getTitle());
+//            product.setPrice(f.getPrice());
+//            product.setDescription(f.getDescription());
+//            product.setCategory(f.getCategory());
+//            product.setImage(f.getImage());
+//            return product;
+//        }).collect(Collectors.toList());
     }
 
     @Override
