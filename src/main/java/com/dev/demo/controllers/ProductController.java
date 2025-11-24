@@ -1,8 +1,12 @@
 package com.dev.demo.controllers;
 
+import com.dev.demo.dtos.ExceptionDto;
 import com.dev.demo.dtos.GenericProductDto;
+import com.dev.demo.exceptions.NotFoundException;
 import com.dev.demo.services.ProductService;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -27,9 +31,17 @@ public class ProductController {
         return this.productService.getAllProducts();
     }
     @GetMapping("/{id}")
-    public GenericProductDto getProductById(@PathVariable("id") Long id) {
+    public GenericProductDto getProductById(@PathVariable("id") Long id) throws NotFoundException {
         return this.productService.getProductById(id);
     }
+
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<ExceptionDto> handleNotFound(NotFoundException ex) {
+        return new ResponseEntity<>(
+                new ExceptionDto(HttpStatus.NOT_FOUND, ex.getMessage()),
+                HttpStatus.NOT_FOUND);
+    }
+
     @DeleteMapping("/{id}")
     public GenericProductDto deleteProductById(@PathVariable("id") Long id) {
         return this.productService.deleteProductById(id);
