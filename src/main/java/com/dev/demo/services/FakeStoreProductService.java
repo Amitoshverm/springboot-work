@@ -3,8 +3,11 @@ package com.dev.demo.services;
 import com.dev.demo.dtos.FakeStoreProductDto;
 import com.dev.demo.dtos.GenericProductDto;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RequestCallback;
+import org.springframework.web.client.ResponseExtractor;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
@@ -45,16 +48,25 @@ public class FakeStoreProductService implements ProductService{
     }
 
     @Override
-    public String deleteProductById(Long id) {
+    public GenericProductDto deleteProductById(Long id) {
         RestTemplate restTemplate = restTemplateBuilder.build();
-        ResponseEntity<FakeStoreProductDto> response = restTemplate.getForEntity(specificProductUrl, FakeStoreProductDto.class, id);
-        FakeStoreProductDto data = response.getBody();
-        if(data == null){
-            return "data with id: "+id+" not found";
-        }
-        restTemplate.delete(specificProductUrl,id);
-//        response.getStatusCode();
-        return "data with id: "+id+" has been deleted";
+
+        RequestCallback requestCallback = restTemplate.acceptHeaderRequestCallback(FakeStoreProductDto.class);
+        ResponseExtractor<ResponseEntity<FakeStoreProductDto>> responseExtractor =
+                restTemplate.responseEntityExtractor(FakeStoreProductDto.class);
+        ResponseEntity<FakeStoreProductDto> response =
+                restTemplate.execute(specificProductUrl, HttpMethod.DELETE, requestCallback, responseExtractor, id);
+
+        FakeStoreProductDto fakeStoreProductDto = response.getBody();
+
+        GenericProductDto product = new GenericProductDto();
+        product.setTitle(fakeStoreProductDto.getTitle());
+        product.setDescription(fakeStoreProductDto.getDescription());
+        product.setPrice(fakeStoreProductDto.getPrice());
+        product.setCategory(fakeStoreProductDto.getCategory());
+        product.setImage(fakeStoreProductDto.getImage());
+        return product;
+
     }
 
     @Override

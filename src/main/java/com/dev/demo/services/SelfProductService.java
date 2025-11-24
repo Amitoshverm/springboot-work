@@ -30,7 +30,7 @@ public class SelfProductService implements ProductService{
     }
 
     @Override
-    public String deleteProductById(Long id) {
+    public GenericProductDto deleteProductById(Long id) {
         return null;
     }
 }
