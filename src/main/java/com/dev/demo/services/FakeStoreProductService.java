@@ -81,23 +81,6 @@ public class FakeStoreProductService implements ProductService{
             products.add(convertToGenericProductDto(dto));
         }
         return products;
-
-//        ResponseEntity<List<GenericProductDto>> response = restTemplate.exchange(productBaseUrl, HttpMethod.GET, null,
-//                new ParameterizedTypeReference<List<GenericProductDto>>() {
-//        });
-//        List<GenericProductDto> fakeProducts = response.getBody();
-//        if (fakeProducts == null) {
-//            return List.of();
-//        }
-//        return fakeProducts.stream().map(f -> {
-//            GenericProductDto product = new GenericProductDto();
-//            product.setTitle(f.getTitle());
-//            product.setPrice(f.getPrice());
-//            product.setDescription(f.getDescription());
-//            product.setCategory(f.getCategory());
-//            product.setImage(f.getImage());
-//            return product;
-//        }).collect(Collectors.toList());
     }
 
     @Override
