@@ -15,5 +15,5 @@ public interface ProductService {
 
     List<GenericProductDto> getAllProducts();
 
-    GenericProductDto updateProductById(Long id, GenericProductDto productDto);
+    GenericProductDto updateProductById(Long id, GenericProductDto productDto) throws NotFoundException;
 }
