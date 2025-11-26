@@ -35,13 +35,6 @@ public class ProductController {
         return this.productService.getProductById(id);
     }
 
-    @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<ExceptionDto> handleNotFound(NotFoundException ex) {
-        return new ResponseEntity<>(
-                new ExceptionDto(HttpStatus.NOT_FOUND, ex.getMessage()),
-                HttpStatus.NOT_FOUND);
-    }
-
     @DeleteMapping("/{id}")
     public GenericProductDto deleteProductById(@PathVariable("id") Long id) {
         return this.productService.deleteProductById(id);
