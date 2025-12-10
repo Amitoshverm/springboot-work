@@ -9,21 +9,21 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 
 @ControllerAdvice
 public class ControllerAdvices {
+//
+//    @ExceptionHandler(NotFoundException.class)
+//    public ResponseEntity<ExceptionDto> handleNotFound(NotFoundException ex) {
+//
+//        return new ResponseEntity<>(
+//                new ExceptionDto(HttpStatus.NOT_FOUND, ex.getMessage()),
+//                HttpStatus.NOT_FOUND);
+//
+//    }
+//    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+//    public ResponseEntity<ExceptionDto> MethodArgumentMismatchException(MethodArgumentTypeMismatchException ex) {
+//
+//        return new ResponseEntity<>(
+//                new ExceptionDto(HttpStatus.NOT_FOUND, ex.getMessage()),
+//                HttpStatus.BAD_REQUEST);
 
-    @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<ExceptionDto> handleNotFound(NotFoundException ex) {
-
-        return new ResponseEntity<>(
-                new ExceptionDto(HttpStatus.NOT_FOUND, ex.getMessage()),
-                HttpStatus.NOT_FOUND);
-
-    }
-    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
-    public ResponseEntity<ExceptionDto> MethodArgumentMismatchException(MethodArgumentTypeMismatchException ex) {
-
-        return new ResponseEntity<>(
-                new ExceptionDto(HttpStatus.NOT_FOUND, ex.getMessage()),
-                HttpStatus.BAD_REQUEST);
-
-    }
+//    }
 }
