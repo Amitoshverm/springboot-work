@@ -24,11 +24,15 @@ public class FakeStoreProductServiceClient  {
     @Value("${fake.store.products.path}")
     private String productEndpoint;
 
-    private final String specificProductUrl = fakeStoreApiBaseUrl + productEndpoint + "/{id}";
-    private final String productBaseUrl = fakeStoreApiBaseUrl + productEndpoint;
+    private final String specificProductUrl;
+    private final String productBaseUrl;
 
-    public FakeStoreProductServiceClient(RestTemplateBuilder restTemplateBuilder) {
+    public FakeStoreProductServiceClient(RestTemplateBuilder restTemplateBuilder,
+                                         @Value("${fake.store.url}") String fakeStoreApiBaseUrl,
+                                         @Value("${fake.store.products.path}") String productEndpoint) {
         this.restTemplateBuilder = restTemplateBuilder;
+        this.specificProductUrl = fakeStoreApiBaseUrl + productEndpoint + "/{id}";
+        this.productBaseUrl = fakeStoreApiBaseUrl + productEndpoint;
     }
 
     private GenericProductDto convertToGenericProductDto(FakeStoreProductDto fakeStoreProductDto) {
