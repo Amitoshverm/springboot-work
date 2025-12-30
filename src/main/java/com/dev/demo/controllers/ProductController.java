@@ -1,6 +1,5 @@
 package com.dev.demo.controllers;
 
-import com.dev.demo.dtos.ExceptionDto;
 import com.dev.demo.dtos.GenericProductDto;
 import com.dev.demo.exceptions.NotFoundException;
 import com.dev.demo.services.ProductService;
