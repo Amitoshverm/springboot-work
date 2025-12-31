@@ -1,13 +1,13 @@
 package com.dev.demo.inherenetance.singletable;
 
-import jakarta.persistence.Id;
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 @Setter
 @Getter
-@MappedSuperclass
+@Entity(name = "st_user")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class User {
     @Id
     private Long id;
