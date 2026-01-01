@@ -1,4 +1,4 @@
-package com.dev.demo.inherenetance.singletable;
+package com.dev.demo.inherenetance.joinedtable;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -6,10 +6,8 @@ import lombok.Setter;
 
 @Setter
 @Getter
-@Entity(name = "st_user")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "st_user", discriminatorType = DiscriminatorType.INTEGER)
-@DiscriminatorValue(value="0")
+@Entity(name = "jt_user")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class User {
     @Id
     private Long id;

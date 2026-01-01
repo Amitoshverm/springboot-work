@@ -1,4 +1,4 @@
-package com.dev.demo.inherenetance.singletable;
+package com.dev.demo.inherenetance.joinedtable;
 
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
@@ -7,8 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Entity(name = "st_student")
-@DiscriminatorValue(value = "2")
+@Entity(name = "jt_student")
 public class Student extends User {
     private String batchName;
     private double psp;

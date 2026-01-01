@@ -1,4 +1,4 @@
-package com.dev.demo.inherenetance.singletable;
+package com.dev.demo.inherenetance.joinedtable;
 
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
@@ -7,8 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Entity(name = "st_mentor")
-@DiscriminatorValue(value = "1")
+@Entity(name = "jt_mentor")
 public class Mentor extends User {
     private double averageRating;
 }
