@@ -13,6 +13,6 @@ public class BaseModel {
     @Id
     @GeneratedValue(generator = "amitosh")
     @GenericGenerator(name="amitosh", strategy = "uuid2")
-    @Column(name="id", columnDefinition = "binary(16)", nullable = false)
+    @Column(name="id", length = 36, nullable = false)
     private UUID id;
 }
