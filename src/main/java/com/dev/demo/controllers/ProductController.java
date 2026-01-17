@@ -29,9 +29,14 @@ public class ProductController {
     public List<GenericProductDto> getAllProducts( ) {
         return this.productService.getAllProducts();
     }
+
     @GetMapping("/{id}")
     public GenericProductDto getProductById(@PathVariable("id") Long id) throws NotFoundException {
-        return this.productService.getProductById(id);
+        GenericProductDto genericProductDto =  this.productService.getProductById(id);
+        if  (genericProductDto == null) {
+            return null;
+        }
+        return genericProductDto;
     }
 
     @DeleteMapping("/{id}")
