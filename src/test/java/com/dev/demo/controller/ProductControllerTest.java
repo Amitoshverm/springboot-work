@@ -8,10 +8,14 @@ import com.dev.demo.services.SelfProductService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
+@SpringBootTest
 public class ProductControllerTest {
 
     @Autowired
@@ -23,7 +27,9 @@ public class ProductControllerTest {
 
     @Test
     void testForGetProductById () throws NotFoundException {
-        GenericProductDto genericProductDto = productController.getProductById(121L);
+        GenericProductDto genericProductDto = productController.getProductById(12L);
+
+//        when(productService.getProductById(any(Long.class))).thenReturn(null);
 
         assertNull(genericProductDto);
     }
