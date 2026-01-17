@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ProductControllerTest {
 
@@ -16,7 +17,7 @@ public class ProductControllerTest {
 
     @Test
     void testMultipleAdditionValues () {
-        assert 3 + 3 == 6;
+        assertTrue( 3 + 3 == 6, "3 + 3 should equal 6");
         assert -3 + 3 == 0;
         assert -3 + (-3) == -6;
         assert 0 + 3 == 3;
