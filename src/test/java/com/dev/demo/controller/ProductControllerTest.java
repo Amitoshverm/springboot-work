@@ -35,6 +35,16 @@ public class ProductControllerTest {
     }
 
     @Test
+    void testForNameOfTheProduct () throws NotFoundException {
+        GenericProductDto productDto = new GenericProductDto();
+        productDto.setTitle("test");
+        when(productService.getProductById(1L)).thenReturn(productDto);
+
+        GenericProductDto genericProductDto = productController.getProductById(1L);
+        assertEquals("test", genericProductDto.getTitle());
+    }
+
+    @Test
     @DisplayName("Addition of 1 + 1 should equal 2")
     void testAdditionOnePlusOneEqualsTwo() {
         assert 1 + 1 == 2;
