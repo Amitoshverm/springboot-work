@@ -1,6 +1,5 @@
-package com.dev.demo.controller;
+package com.dev.demo.controllers;
 
-import com.dev.demo.controllers.ProductController;
 import com.dev.demo.dtos.GenericProductDto;
 import com.dev.demo.exceptions.NotFoundException;
 import com.dev.demo.services.ProductService;
@@ -14,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-//@SpringBootTest
+@SpringBootTest
 public class ProductControllerTest {
 
     @Autowired
@@ -26,11 +25,11 @@ public class ProductControllerTest {
 
     @Test
     void testForGetProductById () throws NotFoundException {
-        GenericProductDto genericProductDto = productController.getProductById(12L);
+//        GenericProductDto genericProductDto = productController.getProductById(12L);
 
-//        when(productService.getProductById(any(Long.class))).thenReturn(null);
+        when(productService.getProductById(any(Long.class))).thenReturn(null);
 
-        assertNull(genericProductDto);
+        assertThrows(NotFoundException.class, () -> productController.getProductById(12L));
     }
 
     @Test
