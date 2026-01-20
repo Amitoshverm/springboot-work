@@ -34,8 +34,10 @@ public class ProductController {
     public GenericProductDto getProductById(@PathVariable("id") Long id) throws NotFoundException {
         GenericProductDto genericProductDto =  this.productService.getProductById(id);
         if  (genericProductDto == null) {
-            return null;
+            throw new NotFoundException("Product not found");
         }
+//        GenericProductDto productDto = new GenericProductDto();
+//        productDto.setTitle("something");
         return genericProductDto;
     }
 
