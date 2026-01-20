@@ -4,7 +4,6 @@ import com.dev.demo.controllers.ProductController;
 import com.dev.demo.dtos.GenericProductDto;
 import com.dev.demo.exceptions.NotFoundException;
 import com.dev.demo.services.ProductService;
-import com.dev.demo.services.SelfProductService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-@SpringBootTest
+//@SpringBootTest
 public class ProductControllerTest {
 
     @Autowired
