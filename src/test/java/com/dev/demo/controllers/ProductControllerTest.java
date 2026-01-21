@@ -5,12 +5,15 @@ import com.dev.demo.exceptions.NotFoundException;
 import com.dev.demo.services.ProductService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
@@ -22,6 +25,8 @@ public class ProductControllerTest {
     @MockitoBean
     private ProductService productService;
 
+    @Captor
+    private ArgumentCaptor<Long> idCaptor;
 
     @Test
     void testForGetProductById () throws NotFoundException {
@@ -69,5 +74,18 @@ public class ProductControllerTest {
         assert -3 + (-3) == -6;
         assert 0 + 3 == 3;
 
+    }
+
+    @Test
+    void checkForIdAreGivingMeCorrectProduct() throws NotFoundException {
+        Long id = 101L;
+        when(productService.getProductById(any()))
+                .thenReturn(new GenericProductDto());
+
+        productController.getProductById(id);
+
+        verify(productService).getProductById(idCaptor.capture());
+
+        assertEquals(id, idCaptor.getValue());
     }
 }
