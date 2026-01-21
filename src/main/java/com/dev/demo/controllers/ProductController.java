@@ -26,8 +26,12 @@ public class ProductController {
     }
 
     @GetMapping()
-    public List<GenericProductDto> getAllProducts( ) {
-        return this.productService.getAllProducts();
+    public ResponseEntity<List<GenericProductDto>> getAllProducts( ) {
+        List<GenericProductDto> products = productService.getAllProducts();
+        if (products.isEmpty()) {
+            return new ResponseEntity<>(products,HttpStatus.NOT_FOUND);
+        }
+        return new  ResponseEntity<>(products, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
