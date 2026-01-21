@@ -15,18 +15,18 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class ProductServiceApplication {
 
-	private ProductRepository productRepository;
-	private CategoryRepository categoryRepository;
-	private PersonRepository personRepository;
-	private AddressRepository addressRepository;
-
-	public ProductServiceApplication(ProductRepository productRepository, CategoryRepository categoryRepository,
-									 PersonRepository personRepository, AddressRepository addressRepository) {
-		this.productRepository = productRepository;
-		this.categoryRepository = categoryRepository;
-		this.personRepository = personRepository;
-		this.addressRepository = addressRepository;
-	}
+//	private ProductRepository productRepository;
+//	private CategoryRepository categoryRepository;
+//	private PersonRepository personRepository;
+//	private AddressRepository addressRepository;
+//
+//	public ProductServiceApplication(ProductRepository productRepository, CategoryRepository categoryRepository,
+//									 PersonRepository personRepository, AddressRepository addressRepository) {
+//		this.productRepository = productRepository;
+//		this.categoryRepository = categoryRepository;
+//		this.personRepository = personRepository;
+//		this.addressRepository = addressRepository;
+//	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProductServiceApplication.class, args);
