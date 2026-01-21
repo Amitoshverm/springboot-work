@@ -2,7 +2,6 @@ package com.dev.demo.controllers;
 
 import com.dev.demo.dtos.GenericProductDto;
 import com.dev.demo.services.ProductService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
