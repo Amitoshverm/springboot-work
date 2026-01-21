@@ -34,7 +34,7 @@ public class ProductControllerWebMvcTest {
 
         mockMvc.perform(get("/products"))
                 .andExpect(status().is(200))
-                .andExpect(content().json("[]"));
+                .andExpect(content().string("[]"));
     }
 }
 
