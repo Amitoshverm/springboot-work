@@ -2,8 +2,12 @@ package com.dev.demo.controllers;
 
 import com.dev.demo.dtos.GenericProductDto;
 import com.dev.demo.exceptions.NotFoundException;
+import com.dev.demo.security.JwtObject;
+import com.dev.demo.security.TokenValidator;
 import com.dev.demo.services.ProductService;
+import jakarta.annotation.Nullable;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,9 +19,12 @@ import java.util.*;
 public class ProductController {
 
     private ProductService productService;
+    private TokenValidator tokenValidator;
 
-    public ProductController(@Qualifier("selfProductService") ProductService productService) {
+    public ProductController(@Qualifier("selfProductService") ProductService productService
+            , TokenValidator tokenValidator) {
         this.productService = productService;
+        this.tokenValidator = tokenValidator;
     }
 
     @PostMapping()
@@ -35,8 +42,22 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public GenericProductDto getProductById(@PathVariable("id") Long id) throws NotFoundException {
-        GenericProductDto genericProductDto =  this.productService.getProductById(id);
+    public GenericProductDto getProductById(@Nullable @RequestHeader(HttpHeaders.AUTHORIZATION) String authToken,
+                                            @PathVariable("id") Long id) throws NotFoundException {
+
+        System.out.println("Auth Token: " + authToken);
+        Optional<JwtObject> optionalAuthTokenObj;
+        JwtObject jwtObject = null;
+
+        if(authToken != null) {
+            optionalAuthTokenObj = tokenValidator.validateToken(authToken);
+            if (optionalAuthTokenObj.isEmpty()) {
+               // ignore
+            }
+            jwtObject = optionalAuthTokenObj.get();
+        }
+
+        GenericProductDto genericProductDto =  this.productService.getProductById(id, jwtObject.getUserId());
         if  (genericProductDto == null) {
             throw new NotFoundException("Product not found");
         }

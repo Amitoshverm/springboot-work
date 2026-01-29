@@ -7,7 +7,7 @@ import com.dev.demo.models.Product;
 import java.util.*;
 
 public interface ProductService {
-    GenericProductDto getProductById(Long id) throws NotFoundException;
+    GenericProductDto getProductById(Long id, Long userIdTryingToAccess) throws NotFoundException;
 
     GenericProductDto createProduct(GenericProductDto productDto);
 

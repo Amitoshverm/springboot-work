@@ -20,7 +20,7 @@ public class FakeStoreProductService implements ProductService{
     }
 
     @Override
-    public GenericProductDto getProductById(Long id) throws NotFoundException {
+    public GenericProductDto getProductById(Long id, Long userIdTryingToAccess) throws NotFoundException {
         return convertToGenericProductDto(fakeStoreProductServiceClient.getProductById(id));
     }
 

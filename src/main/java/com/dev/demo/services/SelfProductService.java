@@ -25,8 +25,10 @@ public class SelfProductService implements ProductService{
     }
 
     @Override
-    public GenericProductDto getProductById(Long id) {
-        Product product = this.productRepository.findById(id).orElseThrow(() -> new RuntimeException("Product not found"));
+    public GenericProductDto getProductById(Long id, Long userIdTryingToAccess) {
+        Product product = this.productRepository
+                .findById(id).orElseThrow(() -> new RuntimeException("Product not found"));
+
         return convertToGenericProductDto(product);
 
     }
