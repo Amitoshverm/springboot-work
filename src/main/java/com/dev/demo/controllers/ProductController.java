@@ -42,22 +42,21 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public GenericProductDto getProductById(@Nullable @RequestHeader(HttpHeaders.AUTHORIZATION) String authToken,
-                                            @PathVariable("id") Long id) throws NotFoundException {
+    public GenericProductDto getProductById(@PathVariable("id") Long id) throws NotFoundException {
 
-        System.out.println("Auth Token: " + authToken);
-        Optional<JwtObject> optionalAuthTokenObj;
-        JwtObject jwtObject = null;
+//        System.out.println("Auth Token: " + authToken);
+//        Optional<JwtObject> optionalAuthTokenObj;
+//        JwtObject jwtObject = null;
+//
+//        if(authToken != null) {
+//            optionalAuthTokenObj = tokenValidator.validateToken(authToken);
+//            if (optionalAuthTokenObj.isEmpty()) {
+//               // ignore
+//            }
+//            jwtObject = optionalAuthTokenObj.get();
+//        }
 
-        if(authToken != null) {
-            optionalAuthTokenObj = tokenValidator.validateToken(authToken);
-            if (optionalAuthTokenObj.isEmpty()) {
-               // ignore
-            }
-            jwtObject = optionalAuthTokenObj.get();
-        }
-
-        GenericProductDto genericProductDto =  this.productService.getProductById(id, jwtObject.getUserId());
+        GenericProductDto genericProductDto =  this.productService.getProductById(id);
         if  (genericProductDto == null) {
             throw new NotFoundException("Product not found");
         }
